@@ -348,6 +348,276 @@ void inOrderTraversal(Node node) {
     inOrderTraversal(node.right);
 }
 ```
+# Post-order Traversal
+
+In post-order traversal, the nodes are recursively visited in this order:
+
+1. Traverse the left subtree.
+2. Traverse the right subtree.
+3. Visit the root node.
+
+```java
+void postOrderTraversal(Node node) {
+    if (node == null) {
+        return;
+    }
+    postOrderTraversal(node.left);
+    postOrderTraversal(node.right);
+    System.out.print(node.data + " ");
+}
+```
+
+# Diagram for Post-order Traversal
+
+```
+     Post-order Traversal Diagram:
+    
+                      1
+                    /   \
+                  2       3
+                 / \     / \
+                4   5   6   7
+
+Post-order Traversal: 4 5 2 6 7 3 1
+```
+
+# In-order Traversal Iterative
+
+In in-order traversal, the nodes are visited in this order:
+
+1. Traverse the left subtree.
+2. Visit the root node.
+3. Traverse the right subtree.
+
+```java
+void inOrderTraversalIterative(Node root) {
+    Stack<Node> stack = new Stack<>();
+    Node current = root;
+    
+    while (current != null || !stack.isEmpty()) {
+        while (current != null) {
+            stack.push(current);
+            current = current.left;
+        }
+        
+        current = stack.pop();
+        System.out.print(current.data + " ");
+        current = current.right;
+    }
+}
+```
+
+# Diagram for In-order Traversal Iterative
+
+```
+     In-order Traversal Iterative Diagram:
+    
+                      1
+                    /   \
+                  2       3
+                 / \     / \
+                4   5   6   7
+
+In-order Traversal: 4 2 5 1 6 3 7
+```
+
+# Post-order Traversal Iterative
+
+In post-order traversal, the nodes are visited in this order:
+
+1. Traverse the left subtree.
+2. Traverse the right subtree.
+3. Visit the root node.
+
+```java
+void postOrderTraversalIterative(Node root) {
+    Stack<Node> stack = new Stack<>();
+    Node current = root;
+    Node lastVisited = null;
+    
+    while (current != null || !stack.isEmpty()) {
+        while (current != null) {
+            stack.push(current);
+            current = current.left;
+        }
+        
+        Node top = stack.peek();
+        
+        if (top.right == null || top.right == lastVisited) {
+            System.out.print(top.data + " ");
+            lastVisited = stack.pop();
+        } else {
+            current = top.right;
+        }
+    }
+}
+```
+
+# Diagram for Post-order Traversal Iterative
+
+```
+     Post-order Traversal Iterative Diagram:
+    
+                      1
+                    /   \
+                  2       3
+                 / \     / \
+                4   5   6
+
+# Level-order Traversal
+
+In level-order traversal, the nodes are visited level by level from left to right:
+
+1. Visit all nodes at a given level.
+2. Move to the next level.
+
+```java
+void levelOrderTraversal(Node root) {
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+    
+    while (!queue.isEmpty()) {
+        Node node = queue.poll();
+        System.out.print(node.data + " ");
+        
+        if (node.left != null) {
+            queue.add(node.left);
+        }
+        if (node.right != null) {
+            queue.add(node.right);
+        }
+    }
+}
+```
+
+# Depth-first Search
+
+Depth-first search (DFS) is a traversal algorithm that explores as far as possible along each branch before backtracking. It can be implemented using recursion or a stack.
+
+```java
+void dfs(Node node) {
+    if (node == null) {
+        return;
+    }
+    System.out.print(node.data + " ");
+    
+    dfs(node.left);
+    dfs(node.right);
+}
+```
+
+# Diagram for Depth-first Search
+
+                ```
+                    Depth-first Search Diagram:
+                    
+                                  1
+                                /   \
+                               2       3
+                              / \     / \
+                             4   5   6   7
+
+                Depth-first Search: 1 2 4 5 3 6 7
+                ```
+
+# Breadth-first Search
+
+Breadth-first search (BFS) is a traversal algorithm that explores all the nodes at the present depth before moving to the next level. It can be implemented using a queue.
+
+```java
+void bfs(Node root) {
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+    
+    while (!queue.isEmpty()) {
+        Node node = queue.poll();
+        System.out.print(node.data + " ");
+        
+        if (node.left != null) {
+            queue.add(node.left);
+        }
+        if (node.right != null) {
+            queue.add(node.right);
+        }
+    }
+}
+```
+
+# Diagram for Breadth-first Search
+
+```
+    Breadth-first Search Diagram:
+    
+                  1
+                /   \
+               2       3
+              / \     / \
+             4   5   6   7
+
+Breadth-first Search: 1 2 3 4 5 6 7
+```
+
+
+
+# Morris Traversal
+
+Morris Traversal is an in-order tree traversal algorithm that does not use recursion or a stack. It modifies the tree structure to traverse without extra space.
+
+```java
+void morrisTraversal(Node root) {
+    Node current = root;
+    
+    while (current != null) {
+        if (current.left == null) {
+            System.out.print(current.data + " ");
+            current = current.right;
+        } else {
+            Node predecessor = current.left;
+            while (predecessor.right != null && predecessor.right != current) {
+                predecessor = predecessor.right;
+            }
+            
+            if (predecessor.right == null) {
+                predecessor.right = current;
+                current = current.left;
+            } else {
+                predecessor.right = null;
+                System.out.print(current.data + " ");
+                current = current.right;
+            }
+        }
+    }
+}
+```
+
+## Morris Traversal Diagram
+
+```
+Initial Tree:           Step 1:              Step 2:              Final:
+     1                     1                    1                    1
+   /   \                /   \                /   \                /   \
+  2     3     ->      2     3     ->       2     3     ->      2     3
+ / \                 / \                   / \                 / \
+4   5              4   5                 4   5               4   5
+                    \                     \
+                     2                     2
+
+Morris In-order: 4 2 5 1 3
+```
+
+### Key Points:
+- Uses O(1) extra space
+- Temporarily modifies tree structure
+- Restores original tree structure
+- Time complexity: O(n)
+
+### Process:
+1. Find inorder predecessor
+2. Create temporary link
+3. Print and restore links
+4. Move to next node
+
+
 
 ## Applicability in Java
 
