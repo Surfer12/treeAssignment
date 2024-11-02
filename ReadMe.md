@@ -706,3 +706,86 @@ The in-order traversal visits the nodes in the following order:
 
 ## Stack Frames Diagram
 A diagram illustrating the stack frames during the execution of the recursive functions can be found in the project documentation.
+
+## Stack Frame Diagram for Pre-order Traversal
+
+When performing a pre-order traversal, the stack frames are created as the recursive calls are made. Below is a stack frame diagram for the given `preOrderTraversal` method:
+
+### Initial Call
+```
+preOrderTraversal(tree.root)
+```
+
+### Stack Frames
+1. **preOrderTraversal(Node 1)**
+    - Process Node 1
+    - Call preOrderTraversal(Node 2)
+
+2. **preOrderTraversal(Node 2)**
+    - Process Node 2
+    - Call preOrderTraversal(Node 4)
+
+3. **preOrderTraversal(Node 4)**
+    - Process Node 4
+    - Call preOrderTraversal(null) [left child of Node 4]
+    - Return from preOrderTraversal(null)
+    - Call preOrderTraversal(null) [right child of Node 4]
+    - Return from preOrderTraversal(null) 
+    - Return from preOrderTraversal(Node 4)
+
+4. **preOrderTraversal(Node 2)**
+    - Call preOrderTraversal(Node 5)
+
+5. **preOrderTraversal(Node 5)**
+    - Process Node 5
+    - Call preOrderTraversal(null) [left child of Node 5]
+    - Return from preOrderTraversal(null)
+    - Call preOrderTraversal(null) [right child of Node 5]
+    - Return from preOrderTraversal(null)
+    - Return from preOrderTraversal(Node 5)
+
+6. **preOrderTraversal(Node 2)**
+    - Return from preOrderTraversal(Node 2)
+
+7. **preOrderTraversal(Node 1)**
+    - Call preOrderTraversal(Node 3)
+
+8. **preOrderTraversal(Node 3)**
+    - Process Node 3
+    - Call preOrderTraversal(null) [left child of Node 3]
+    - Return from preOrderTraversal(null)
+    - Call preOrderTraversal(null) [right child of Node 3]
+    - Return from preOrderTraversal(null)
+    - Return from preOrderTraversal(Node 3)
+
+9. **preOrderTraversal(Node 1)**
+    - Return from preOrderTraversal(Node 1)
+
+### Diagram
+```
+|---------------------|
+| preOrderTraversal(1)|
+|---------------------|
+| preOrderTraversal(2)|
+|---------------------|
+| preOrderTraversal(4)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(5)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(3)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+```
+
+This diagram shows the sequence of stack frames created during the pre-order traversal of the binary tree.

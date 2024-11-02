@@ -1,0 +1,48 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Timeline axis -->
+    <line x1="50" y1="550" x2="750" y2="550" stroke="black" stroke-width="2"/>
+    <line x1="50" y1="50" x2="50" y2="550" stroke="black" stroke-width="2"/>
+    
+    <!-- Stack frames -->
+    <!-- Node 1 -->
+    <rect x="50" y="500" width="700" height="40" fill="#d4edda" stroke="#28a745"/>
+    <text x="60" y="525" font-family="monospace">preOrderTraversal(1)</text>
+    
+    <!-- Node 2 -->
+    <rect x="100" y="450" width="400" height="40" fill="#d4edda" stroke="#28a745"/>
+    <text x="110" y="475" font-family="monospace">preOrderTraversal(2)</text>
+    
+    <!-- Node 4 -->
+    <rect x="150" y="400" width="150" height="40" fill="#d4edda" stroke="#28a745"/>
+    <text x="160" y="425" font-family="monospace">preOrderTraversal(4)</text>
+    
+    <!-- Null checks for Node 4 -->
+    <rect x="170" y="350" width="50" height="40" fill="#f8d7da" stroke="#dc3545"/>
+    <text x="180" y="375" font-family="monospace">null</text>
+    
+    <!-- Node 5 -->
+    <rect x="300" y="400" width="150" height="40" fill="#d4edda" stroke="#28a745"/>
+    <text x="310" y="425" font-family="monospace">preOrderTraversal(5)</text>
+    
+    <!-- Null checks for Node 5 -->
+    <rect x="320" y="350" width="50" height="40" fill="#f8d7da" stroke="#dc3545"/>
+    <text x="330" y="375" font-family="monospace">null</text>
+    
+    <!-- Node 3 -->
+    <rect x="550" y="450" width="150" height="40" fill="#d4edda" stroke="#28a745"/>
+    <text x="560" y="475" font-family="monospace">preOrderTraversal(3)</text>
+    
+    <!-- Null checks for Node 3 -->
+    <rect x="570" y="400" width="50" height="40" fill="#f8d7da" stroke="#dc3545"/>
+    <text x="580" y="425" font-family="monospace">null</text>
+    
+    <!-- Labels -->
+    <text x="30" y="40" font-family="sans-serif" font-weight="bold">Stack</text>
+    <text x="760" y="570" font-family="sans-serif" font-weight="bold">Time →</text>
+    
+    <!-- Legend -->
+    <rect x="600" y="50" width="20" height="20" fill="#d4edda" stroke="#28a745"/>
+    <text x="630" y="65" font-family="sans-serif">Valid Node</text>
+    <rect x="600" y="80" width="20" height="20" fill="#f8d7da" stroke="#dc3545"/>
+    <text x="630" y="95" font-family="sans-serif">Null Check</text>
+</svg>
