@@ -17,7 +17,7 @@ public class Main {
         // Perform pre-order traversal (Root -> Left -> Right)
         // Expected output: 1 2 4 5 3
         System.out.println("Pre-order Traversal:");
-        tree.preOrderTraversal(tree.root);
+        tree.preOrderTraversal(tree.root); // Starts from the root node
 
         // Perform in-order traversal  (Left -> Root -> Right) 
         // Expected output: 4 2 5 1 3
