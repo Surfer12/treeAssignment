@@ -25,7 +25,7 @@ D) It creates a balanced tree
 **3. Fill in the blank: In an in-order traversal of a binary search tree, nodes are visited in _____ order.**
 A) Random
 B) Descending
-C) Ascending ✓
+C) Ascending 
 D) Level-by-level
 
 **4. What would happen if we try to perform a pre-order traversal on this node?**
