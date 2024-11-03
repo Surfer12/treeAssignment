@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>v1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tree-traversal-algorithms">Tree Traversal Algorithms</h1>
+<ul>
+<li>Tree traversal algorithms are used to visit all nodes of a tree. There are three types of tree traversal algorithms:</li>
+</ul>
+<ol>
+<li>Pre-order Traversal: Process the current node first, then recursively traverse the left subtree and right subtree.</li>
+<li>In-order Traversal: Recursively traverse the left subtree first, then process the current node, and finally traverse the right subtree.</li>
+<li>Post-order Traversal: Recursively traverse the left subtree first, then the right subtree, and finally process the current node.</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+       BinaryTree tree = <span class="hljs-keyword">new</span> BinaryTree();
+
+       <span class="hljs-comment">// Construct the binary tree manually</span>
+       <span class="hljs-comment">//        1</span>
+       <span class="hljs-comment">//       / \</span>
+       <span class="hljs-comment">//      2   3</span>
+       <span class="hljs-comment">//     / \</span>
+       <span class="hljs-comment">//    4   5</span>
+       tree.root = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">1</span>);             <span class="hljs-comment">// Root node</span>
+       tree.root.left = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">2</span>);        <span class="hljs-comment">// Left child of root</span>
+       tree.root.right = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">3</span>);       <span class="hljs-comment">// Right child of root</span>
+       tree.root.left.left = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">4</span>);   <span class="hljs-comment">// Left child of node 2</span>
+       tree.root.left.right = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">5</span>);  <span class="hljs-comment">// Right child of node 2</span>
+
+       <span class="hljs-comment">// Perform pre-order traversal (Root -&gt; Left -&gt; Right)</span>
+       <span class="hljs-comment">// Expected output: 1 2 4 5 3</span>
+       System.out.println(<span class="hljs-string">"Pre-order Traversal:"</span>);
+       tree.preOrderTraversal(tree.root); <span class="hljs-comment">// Starts from the root node</span>
+
+       <span class="hljs-comment">// Perform in-order traversal  (Left -&gt; Root -&gt; Right) </span>
+       <span class="hljs-comment">// Expected output: 4 2 5 1 3</span>
+       System.out.println(<span class="hljs-string">"\nIn-order Traversal:"</span>);
+       tree.inOrderTraversal(tree.root);
+
+       <span class="hljs-comment">// Perform post-order traversal (Left -&gt; Right -&gt; Root)</span>
+       <span class="hljs-comment">// Expected output: 4 5 2 3 1</span>
+       System.out.println(<span class="hljs-string">"\nPost-order Traversal:"</span>);
+       tree.postOrderTraversal(tree.root);
+   }
+}
+</div></code></pre>
+<h2 id="pre-order-traversal">Pre-order Traversal</h2>
+<p>In pre-order traversal, the current node is processed first, then the left subtree, and finally the right subtree. The general algorithm for pre-order traversal is:</p>
+<ol>
+<li>Process the current node.</li>
+<li>Recursively traverse the left subtree.</li>
+<li>Recursively traverse the right subtree.</li>
+</ol>
+<h1 id="pre-order-traversal-in-java">Pre-order Traversal in Java:</h1>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">preOrderTraversal</span><span class="hljs-params">(Node node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+    System.out.print(node.data + <span class="hljs-string">" "</span>); <span class="hljs-comment">// Process current node first</span>
+    preOrderTraversal(node.left);      <span class="hljs-comment">// Then traverse left subtree </span>
+    preOrderTraversal(node.right);     <span class="hljs-comment">// Finally traverse right subtree</span>
+}
+</div></code></pre>
+<h1 id="pre-order-traversal-method-call-diagram">Pre-order Traversal Method Call Diagram</h1>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Main
+    participant Frame1 as preOrderTraversal(1)
+    participant Frame2 as preOrderTraversal(2)
+    participant Frame3 as preOrderTraversal(4)
+    participant Frame4 as preOrderTraversal(5)
+    participant Frame5 as preOrderTraversal(3)
+
+    Main->>Frame1: call(1)
+    Note over Frame1: Print: 1
+
+    Frame1->>Frame2: call left(2)
+    Note over Frame2: Print: 2
+
+    Frame2->>Frame3: call left(4)
+    Note over Frame3: Print: 4
+    Frame3-->>Frame2: return (left: null)
+    Frame3-->>Frame2: return (right: null)
+
+    Frame2->>Frame4: call right(5)
+    Note over Frame4: Print: 5
+    Frame4-->>Frame2: return (left: null)
+    Frame4-->>Frame2: return (right: null)
+    Frame2-->>Frame1: return
+
+    Frame1->>Frame5: call right(3)
+    Note over Frame5: Print: 3
+    Frame5-->>Frame1: return (left: null)
+    Frame5-->>Frame1: return (right: null)
+    Frame1-->>Main: return
+</div></code></pre>
+<h3 id="example">Example</h3>
+<p>Given the following binary tree:</p>
+<pre class="hljs"><code><div>//        1
+//       / \
+//      2   3
+//     / \
+//    4   5
+tree.root = new Node(1);             // Root node
+tree.root.left = new Node(2);        // Left child of root
+tree.root.right = new Node(3);       // Right child of root
+tree.root.left.left = new Node(4);   // Left child of node 2
+tree.root.left.right = new Node(5);  // Right child of node 2
+</div></code></pre>
+<h1 id="pre-order-traversal-example-method-call-call-stack-control-flow-diagram">Pre Order Traversal Example Method Call Call Stack Control Flow Diagram</h1>
+<h1 id="details--each-method-call-is-represented-by-a-solid-arrow">Details : Each method call is represented by a solid arrow (-&gt;)</h1>
+<p>Each return is represented by a dashed arrow (--&gt;)
+The solid bars represent the activation of each method on the stack
+The activation bars are used to show the lifetime of each method on the stack</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant M as Main
+    participant N1 as Node(1)
+    participant N2 as Node(2)
+    participant N4 as Node(4)
+    participant N5 as Node(5)
+    participant N3 as Node(3)
+    participant Null as Null
+
+    M->>+N1: preOrderTraversal(1)
+    Note over N1: Process Node 1
+    
+    N1->>+N2: preOrderTraversal(2)
+    Note over N2: Process Node 2
+    
+    N2->>+N4: preOrderTraversal(4)
+    Note over N4: Process Node 4
+    
+    N4->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N4->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N4-->>-N2: return
+    
+    N2->>+N5: preOrderTraversal(5)
+    Note over N5: Process Node 5
+    
+    N5->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N5->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N5-->>-N2: return
+    
+    N2-->>-N1: return
+    
+    N1->>+N3: preOrderTraversal(3)
+    Note over N3: Process Node 3
+    
+    N3->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N3->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N3-->>-N1: return
+    
+    N1-->>-M: return
+</div></code></pre>
+<p>The pre-order traversal algorithm visits each node in the following order: 1 -&gt; 2 -&gt; 4 -&gt; 5 -&gt; 3. The output of the pre-order traversal algorithm is:</p>
+<pre class="hljs"><code><div>        1
+       / \
+      2   3
+     / \
+    4   5
+</div></code></pre>
+<pre class="hljs"><code><div>Pre-order Traversal:
+1 2 4 5 3
+</div></code></pre>
+<h3 id="stack-frame-diagram-for-pre-order-traversal">Stack Frame Diagram for Pre-order Traversal</h3>
+<pre class="hljs"><code><div>|---------------------|
+| preOrderTraversal(1)|
+|---------------------|
+| preOrderTraversal(2)|
+|---------------------|
+| preOrderTraversal(4)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(5)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(3)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+| preOrderTraversal(null)|
+|---------------------|
+</div></code></pre>
+<pre class="hljs"><code><div>        1
+       / \
+      2   3
+     / \
+    4   5
+</div></code></pre>
+<h1 id="pre-order-traversal-stack-frame-diagram">Pre Order Traversal Stack Frame Diagram</h1>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant M as Main
+    participant N1 as Node(1)
+    participant N2 as Node(2)
+    participant N4 as Node(4)
+    participant N5 as Node(5)
+    participant N3 as Node(3)
+    participant Null as Null
+
+    M->>+N1: preOrderTraversal(1)
+    Note over N1: Process Node 1
+    
+    N1->>+N2: preOrderTraversal(2)
+    Note over N2: Process Node 2
+    
+    N2->>+N4: preOrderTraversal(4)
+    Note over N4: Process Node 4
+    
+    N4->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N4->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N4-->>-N2: return
+    
+    N2->>+N5: preOrderTraversal(5)
+    Note over N5: Process Node 5
+    
+    N5->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N5->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N5-->>-N2: return
+    
+    N2-->>-N1: return
+    
+    N1->>+N3: preOrderTraversal(3)
+    Note over N3: Process Node 3
+    
+    N3->>Null: preOrderTraversal(null)
+    Note over Null: Left child - return
+    N3->>Null: preOrderTraversal(null)
+    Note over Null: Right child - return
+    N3-->>-N1: return
+    
+    N1-->>-M: return
+</div></code></pre>
+<h2 id="in-order-traversal">In-order Traversal</h2>
+<p>In in-order traversal, the left subtree is recursively traversed first, then the current node is processed, and finally, the right subtree is traversed. The general algorithm for in-order traversal is:</p>
+<ol>
+<li>Recursively traverse the left subtree.</li>
+<li>Process the current node.</li>
+<li>Recursively traverse the right subtree.</li>
+<li>In-order Traversal:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inOrderTraversal</span><span class="hljs-params">(Node node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+    inOrderTraversal(node.left);
+    System.out.print(node.data + <span class="hljs-string">" "</span>);
+    inOrderTraversal(node.right);
+}
+</div></code></pre>
+<ol>
+<li>Traverse left subtree first</li>
+<li>Then process current node</li>
+<li>Finally traverse right subtree</li>
+</ol>
+<pre class="hljs"><code><div>        1
+       / \
+      2   3
+     / \
+    4   5
+</div></code></pre>
+<h1 id="in-order-traversal-example-method-call-control-flow-diagram">In order Traversal Example Method Call Control Flow Diagram</h1>
+<pre><code class="language-mermaid"><div class="mermaid">    sequenceDiagram
+    participant Main
+    participant Frame1 as inOrderTraversal(1)
+    participant Frame2 as inOrderTraversal(2)
+    participant Frame3 as inOrderTraversal(4)
+    participant Frame4 as inOrderTraversal(5)
+    participant Frame5 as inOrderTraversal(3)
+
+    Main->>Frame1: call(1)
+    
+    Frame1->>Frame2: visit left(2)
+    Frame2->>Frame3: visit left(4)
+    Note over Frame3: Print: 4
+    Frame3-->>Frame2: return (left: null)
+    Frame3-->>Frame2: return (right: null)
+    
+    Note over Frame2: Print: 2
+    
+    Frame2->>Frame4: visit right(5)
+    Note over Frame4: Print: 5
+    Frame4-->>Frame2: return (left: null)
+    Frame4-->>Frame2: return (right: null)
+    Frame2-->>Frame1: return
+    
+    Note over Frame1: Print: 1
+    
+    Frame1->>Frame5: visit right(3)
+    Note over Frame5: Print: 3
+    Frame5-->>Frame1: return (left: null)
+    Frame5-->>Frame1: return (right: null)
+    Frame1-->>Main: return
+</div></code></pre>
+<h1 id="stack-frame-diagram">Stack Frame Diagram</h1>
+<pre class="hljs"><code><div>|---------------------|
+| inOrderTraversal(<span class="hljs-number">1</span>) |
+|---------------------|
+| inOrderTraversal(<span class="hljs-number">2</span>) |
+|---------------------|
+| inOrderTraversal(<span class="hljs-number">4</span>) |
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| inOrderTraversal(<span class="hljs-number">5</span>) |
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| inOrderTraversal(<span class="hljs-number">3</span>) |
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| inOrderTraversal(<span class="hljs-keyword">null</span>)|
+|----------------
+</div></code></pre>
+<!-- TODO: Stack Frame Chart for In-order Traversal method and stack frame
+ -->
+<h1 id="in-order-traversal-sequence-diagram">In Order Traversal Sequence Diagram</h1>
+<h2 id="details--each-method-call-is-represented-by-a-solid-arrow">Details : Each method call is represented by a solid arrow (-&gt;)</h2>
+<p>Each return is represented by a dashed arrow (--&gt;)
+The printing operations are shown as notes above the respective method calls
+The activation bars (vertical rectangles) show when each method is active on the stack
+The activation bars are colored to differentiate between different methods</p>
+<p>The complete execution flow results in printing: 4, 2, 5, 1, 3, which is the correct in-order traversal sequence</p>
+<h1 id="color-coded-stack-frame-diagram">Color Coded Stack Frame Diagram</h1>
+<p>The sequence diagram uses different colors to represent method execution levels:</p>
+<ul>
+<li><strong>Gray</strong>: Main method execution</li>
+<li><strong>Light Red</strong>: Root level - inOrderTraversal(1) and its scope</li>
+<li><strong>Light Green</strong>: Left subtree - inOrderTraversal(2) and children (4,5)</li>
+<li><strong>Light Blue</strong>: Right subtree - inOrderTraversal(3) execution</li>
+</ul>
+<p>This color scheme helps visualize:</p>
+<ul>
+<li>Nested call hierarchy</li>
+<li>Stack frame lifetime</li>
+<li>Subtree traversal boundaries</li>
+</ul>
+<p>The diagram clearly shows how recursion:</p>
+<ol>
+<li>Processes the left subtree (green)</li>
+<li>Returns to complete the root (red)</li>
+<li>Finishes with the right subtree (blue)</li>
+</ol>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant M as Main
+    participant T1 as inOrderTraversal(1)
+    participant T2 as inOrderTraversal(2)
+    participant T4 as inOrderTraversal(4)
+    participant T5 as inOrderTraversal(5)
+    participant T3 as inOrderTraversal(3)
+
+    rect rgb(200, 200, 200)
+        M->>+T1: call(1)
+    end
+    rect rgb(255, 200, 200)
+        T1->>+T2: visit left(2)
+        rect rgb(200, 255, 200)
+            T2->>+T4: visit left(4)
+            Note over T4: Print: 4
+            T4-->>-T2: return (left: null)
+            T2-->>T2: return (right: null)
+            Note over T2: Print: 2
+            T2->>+T5: visit right(5)
+            Note over T5: Print: 5
+            T5-->>-T2: return (left: null)
+            T2-->>T2: return (right: null)
+        end
+        T2-->>-T1: return
+        Note over T1: Print: 1
+        rect rgb(200, 200, 255)
+            T1->>+T3: visit right(3)
+            Note over T3: Print: 3
+            T3-->>-T1: return (left: null)
+            T1-->>T1: return (right: null)
+        end
+    end
+    T1-->>-M: return
+</div></code></pre>
+<!-- TODO: Stack Frame Chart for Post-order Traversal method and stack frame
+ -->
+<h2 id="post-order-traversal">Post-order Traversal</h2>
+<p>In post-order traversal, the left subtree is recursively traversed first, then the right subtree, and finally, the current node is processed. The general algorithm for post-order traversal is:</p>
+<ol>
+<li>Recursively traverse the left subtree.</li>
+<li>Recursively traverse the right subtree.</li>
+<li>Process the current node.</li>
+<li>Post-order Traversal:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postOrderTraversal</span><span class="hljs-params">(Node node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+    postOrderTraversal(node.left);      <span class="hljs-comment">// Traverse left subtree first</span>
+    postOrderTraversal(node.right);     <span class="hljs-comment">// Then traverse right subtree</span>
+    System.out.print(node.data + <span class="hljs-string">" "</span>);  <span class="hljs-comment">// Finally process current node</span>
+}
+</div></code></pre>
+<h1 id="stack-frame-diagram">Stack Frame Diagram</h1>
+<pre class="hljs"><code><div>|---------------------|
+| postOrderTraversal(<span class="hljs-number">1</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-number">2</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-number">4</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-number">5</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-number">3</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+| postOrderTraversal(<span class="hljs-keyword">null</span>)|
+|---------------------|
+</div></code></pre>
+<h2 id="complexity-analysis">Complexity Analysis</h2>
+<p>The time complexity of tree traversal algorithms is O(n), where n is the number of nodes in the tree.
+The space complexity of tree traversal algorithms is O(h), where h is the height of the tree.
+The space complexity is O(h) because the recursive calls are stored on the stack, and the maximum depth of the stack is equal to the height of the tree.
+In the worst-case scenario, the height of the tree can be equal to the number of nodes in the tree, resulting in O(n) space complexity.</p>
+<p>A leaf node in Java is a node that has no children - both its left and right references are null. This is demonstrated in several ways in the codebase:</p>
+<ol>
+<li>Node Class Implementation:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
+    <span class="hljs-keyword">int</span> data;
+    Node left, right;
+    
+    Node(<span class="hljs-keyword">int</span> item) {
+        data = item;
+        left = right = <span class="hljs-keyword">null</span>;  <span class="hljs-comment">// Initializes both children as null</span>
+    }
+}
+</div></code></pre>
+<ol start="2">
+<li>Key Characteristics of Leaf Nodes:</li>
+</ol>
+<ul>
+<li>Both <code>left</code> and <code>right</code> references are null</li>
+<li>Can't have any children</li>
+<li>Are at the bottom level of the tree</li>
+<li>Store actual data values</li>
+</ul>
+<ol start="3">
+<li>Examples from the Codebase:
+In the tree structure shown:</li>
+</ol>
+<pre class="hljs"><code><div>        1
+       / \
+      2   3
+     / \
+    4   5
+</div></code></pre>
+<p>Nodes 4, 5, and 3 are leaf nodes because:</p>
+<ul>
+<li>They have no children (both left and right are null)</li>
+<li>They are at the bottom of the tree structure</li>
+<li>This clearly indicates their special status as terminal nodes in the tree structure.</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant M as Main
+    participant F1 as Frame1(1)
+    participant F2 as Frame2(2) 
+    participant F3 as Frame3(4)
+    participant F4 as Frame4(5)
+    participant F5 as Frame5(3)
+
+    rect rgb(240,240,255)
+        Note over M,F5: Post-order Traversal Stack Frames
+        
+        M->>+F1: postOrder(1)
+        
+        rect rgb(255,240,240)
+            F1->>+F2: postOrder(2)
+            
+            rect rgb(240,255,240)
+                F2->>+F3: postOrder(4)
+                Note over F3: Process 4
+                F3-->>-F2: return
+                
+                F2->>+F4: postOrder(5) 
+                Note over F4: Process 5
+                F4-->>-F2: return
+                
+                Note over F2: Process 2
+            end
+            F2-->>-F1: return
+            
+            rect rgb(240,240,255)
+                F1->>+F5: postOrder(3)
+                Note over F5: Process 3
+                F5-->>-F1: return
+                
+                Note over F1: Process 1
+            end
+        end
+        F1-->>-M: return
+    end
+
+    Note over M: Color Legend
+    Note over M: Blue: Root Level
+    Note over M: Red: Left Subtree
+    Note over M: Green: Leaf Nodes
+</div></code></pre>
+<p>This diagram shows:</p>
+<ol>
+<li>
+<p>Color coding for different levels:</p>
+<ul>
+<li>Blue: Root level operations</li>
+<li>Red: Left subtree operations</li>
+<li>Green: Leaf node operations</li>
+</ul>
+</li>
+<li>
+<p>Stack frame progression:</p>
+<ul>
+<li>Main calls postOrder(1)</li>
+<li>Frame1 calls postOrder(2)</li>
+<li>Frame2 calls postOrder(4)</li>
+<li>Process node 4</li>
+<li>Frame2 calls postOrder(5)</li>
+<li>Process node 5</li>
+<li>Process node 2</li>
+<li>Frame1 calls postOrder(3)</li>
+<li>Process node 3</li>
+<li>Process node 1</li>
+</ul>
+</li>
+<li>
+<p>Final traversal order: 4 -&gt; 5 -&gt; 2 -&gt; 3 -&gt; 1</p>
+</li>
+</ol>
+<p>The nested rectangles help visualize the stack frames and their lifetimes during execution.</p>
+<h1 id="post-order-traversal-diagrams">Post Order Traversal Diagrams</h1>
+<pre><code class="language-mermaid"><div class="mermaid">graph TD
+    1[1] --> 2[2]
+    1 --> 3[3]
+    2 --> 4[4]
+    2 --> 5[5]
+
+   subgraph Tree
+        1[1]:::root --> 2[2]:::internal
+        1 --> 3[3]:::internal
+        2 --> 4[4]:::leaf
+        2 --> 5[5]:::leaf
+        3 --> null1[null]:::nullNode
+        3 --> null2[null]:::nullNode
+        4 --> null3[null]:::nullNode
+        4 --> null4[null]:::nullNode
+        5 --> null5[null]:::nullNode
+        5 --> null6[null]:::nullNode
+    end
+
+    subgraph "Frame Execution"
+        direction TB
+        SF1["Frame 1: post(1)"] --> SF2["Frame 2: post(2)"]
+        SF2 --> SF3["Frame 3: post(4)"]
+        SF3 --> SF4["Frame 4: post(null)"]
+        SF4 --> |return| SF3
+        SF3 --> SF5["Frame 5: post(null)"]
+        SF5 --> |"visit(4)"| SF3p["Frame 3: complete"]
+        SF3p --> |return| SF2
+        SF2 --> SF6["Frame 6: post(5)"]
+        SF6 --> SF7["Frame 7: post(null)"]
+        SF7 --> |return| SF6
+        SF6 --> SF8["Frame 8: post(null)"]
+        SF8 --> |"visit(5)"| SF6p["Frame 6: complete"]
+        SF6p --> |"visit(2)"| SF2p["Frame 2: complete"]
+        SF2p --> |return| SF1
+        SF1 --> SF9["Frame 9: post(3)"]
+        SF9 --> SF10["Frame 10: post(null)"]
+        SF10 --> |return| SF9
+        SF9 --> SF11["Frame 11: post(null)"]
+        SF11 --> |"visit(3)"| SF9p["Frame 9: complete"]
+        SF9p --> |"visit(1)"| SF1p["Frame 1: complete"]
+    end
+
+    style 1 fill:#f9f,stroke:#333,stroke-width:4px
+    style 2 fill:#bbf,stroke:#333,stroke-width:2px
+    style 3 fill:#bbf,stroke:#333,stroke-width:2px
+    style 4 fill:#ddf,stroke:#333,stroke-width:2px
+    style 5 fill:#ddf,stroke:#333,stroke-width:2px
+</div></code></pre>
+<pre><code class="language-mermaid"><div class="mermaid">graph TD
+    classDef root fill:#f9f,stroke:#333,stroke-width:4px
+    classDef internal fill:#bbf,stroke:#333,stroke-width:2px
+    classDef leaf fill:#ddf,stroke:#333,stroke-width:2px
+    classDef nullNode fill:#eee,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5
+    classDef note fill:#fff,stroke:#333,stroke-width:1px
+    
+
+    subgraph Legend
+        L1[Root Node]:::root
+        L2[Internal Node]:::internal
+        L3[Leaf Node]:::leaf
+        L4[Null Node]:::nullNode
+        N1[Execution Order: 4 → 5 → 2 → 3 → 1]:::note
+        N2[Post-order: Left → Right → Root]:::note
+    end
+
+
+    %% Style definitions
+    classDef traverseDown fill:#f9f,stroke:#333,stroke-width:2px
+    classDef processNode fill:#bbf,stroke:#333,stroke-width:2px
+    classDef returnUp fill:#ddf,stroke:#333,stroke-width:2px
+
+    subgraph "Execution Flow"
+        direction TB
+        Root["1"] -->|"traverse"| Left["2"]
+        Left -->|"traverse"| LL["4"]
+        LL -.->|"process"| LL_P["4✓"]
+        LL_P ==>|"return"| Left
+        Left -->|"traverse"| LR["5"]
+        LR -.->|"process"| LR_P["5✓"]
+        LR_P ==>|"return"| Left
+        Left -.->|"process"| Left_P["2✓"]
+        Left_P ==>|"return"| Root
+        Root -->|"traverse"| Right["3"]
+        Right -.->|"process"| Right_P["3✓"]
+        Right_P ==>|"return"| Root
+        Root -.->|"process"| Root_P["1✓"]
+    end
+
+    %% Line styles
+    linkStyle 0,1,4 stroke:#666,stroke-width:2px,stroke-dasharray: none
+    linkStyle 2,5,7,9,11 stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 3,6,8,10,12 stroke:#44f,stroke-width:3px,stroke-dasharray: 10 5
+
+    %% Node styles
+    class Root,Left,Right traverseDown
+    class LL,LR processNode
+    class LL_P,LR_P,Left_P,Right_P,Root_P returnUp
+</div></code></pre>
+<h1 id="post-order-traversal-sequence-diagram">Post-order Traversal Sequence Diagram</h1>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant M as Main
+    participant T1 as postOrder(1)
+    participant T2 as postOrder(2)
+    participant T4 as postOrder(4)
+    participant T5 as postOrder(5)
+    participant T3 as postOrder(3)
+
+    rect rgb(240, 240, 240)
+        Note over M,T3: Left Subtree Traversal
+        M->>+T1: start
+        T1->>+T2: traverse left
+        T2->>+T4: traverse left
+        T4-->>-T2: visit(4)
+        T2->>+T5: traverse right
+        T5-->>-T2: visit(5)
+        T2-->>-T1: visit(2)
+    end
+    
+    rect rgb(230, 240, 230)
+        Note over M,T3: Right Subtree Traversal
+        T1->>+T3: traverse right
+        T3-->>-T1: visit(3)
+    end
+    
+    rect rgb(240, 230, 240)
+        Note over M,T3: Root Node Visit
+        T1-->>-M: visit(1)
+    end
+</div></code></pre>
+<h1 id="post-order-traversal-sequence-diagram">Post Order Traversal Sequence Diagram</h1>
+<pre><code class="language-mermaid"><div class="mermaid">graph TD
+    %% Style definitions
+    classDef root fill:#f9f,stroke:#333,stroke-width:4px
+    classDef internal fill:#bbf,stroke:#333,stroke-width:2px
+    classDef leaf fill:#ddf,stroke:#333,stroke-width:2px
+    classDef nullNode fill:#eee,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5
+    classDef processArrow stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+    classDef returnArrow stroke:#44f,stroke-width:3px,stroke-dasharray: 10 5
+
+    subgraph Tree["Binary Tree Structure"]
+        T1[1]:::root --> T2[2]:::internal
+        T1 --> T3[3]:::internal
+        T2 --> T4[4]:::leaf
+        T2 --> T5[5]:::leaf
+        T3 --> N1[null]:::nullNode
+        T3 --> N2[null]:::nullNode
+        T4 --> N3[null]:::nullNode
+        T4 --> N4[null]:::nullNode
+        T5 --> N5[null]:::nullNode
+        T5 --> N6[null]:::nullNode
+    end
+
+    subgraph Flow["Execution Flow"]
+        direction TB
+        R1[1] -->|traverse| L1[2]
+        L1 -->|traverse| LL1[4]
+        LL1 -.->|process| LL1_P[4✓]
+        LL1_P ==>|return| L1
+        L1 -->|traverse| LR1[5]
+        LR1 -.->|process| LR1_P[5✓]
+        LR1_P ==>|return| L1
+        L1 -.->|process| L1_P[2✓]
+        L1_P ==>|return| R1
+        R1 -->|traverse| R1_N[3]
+        R1_N -.->|process| R1_NP[3✓]
+        R1_NP ==>|return| R1
+        R1 -.->|process| R1_P[1✓]
+    end
+
+    subgraph Legend["Legend"]
+        L_R[Root Node]:::root
+        L_I[Internal Node]:::internal
+        L_L[Leaf Node]:::leaf
+        L_N[Null Node]:::nullNode
+        
+    end
+
+    %% Apply styles to flow diagram
+    class R1,L1,R1_N root
+    class LL1,LR1 leaf
+    class LL1_P,LR1_P,L1_P,R1_NP,R1_P internal
+</div></code></pre>
+<h4 id="note-post-order-sequence-4-%E2%86%92-5-%E2%86%92-2-%E2%86%92-3-%E2%86%92-1">Note [Post-order Sequence: 4 → 5 → 2 → 3 → 1]</h4>
+<h2 id="summary-and-key-insights-and-concepts-of-binary-tree-traversals-in-java-pre-order-post-order-and-in-order">Summary and Key Insights and Concepts of Binary Tree Traversals in Java: Pre-Order, Post-Order and In-Order.</h2>
+<p>Binary tree traversals are fundamental operations to visit all the nodes in a binary tree systematically. Two common types are <strong>Pre-Order</strong> and <strong>Post-Order</strong> traversals. Let's delve into each with specific examples in Java. After we will look at <strong>In-Order</strong> traversal.</p>
+<h3 id="pre-order-traversal">Pre-Order Traversal</h3>
+<p><strong>Order of Operations:</strong></p>
+<ol>
+<li><strong>Visit the current node.</strong></li>
+<li>Traverse the <strong>left subtree</strong>.</li>
+<li>Traverse the <strong>right subtree</strong>.</li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Copying the tree.</li>
+<li>Prefix expression (Polish notation) in expression trees.</li>
+</ul>
+<p><strong>Example Implementation:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Java implementation of Pre-Order Traversal</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span> </span>{
+    <span class="hljs-keyword">int</span> val;
+    TreeNode left, right;
+
+    TreeNode(<span class="hljs-keyword">int</span> item) {
+        val = item;
+        left = right = <span class="hljs-keyword">null</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinaryTree</span> </span>{
+    TreeNode root;
+
+    <span class="hljs-comment">// Pre-Order Traversal: Root -&gt; Left -&gt; Right</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">preOrderTraversal</span><span class="hljs-params">(TreeNode node)</span> </span>{
+        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        System.out.print(node.val + <span class="hljs-string">" "</span>);      <span class="hljs-comment">// Visit node</span>
+        preOrderTraversal(node.left);          <span class="hljs-comment">// Traverse left</span>
+        preOrderTraversal(node.right);         <span class="hljs-comment">// Traverse right</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        BinaryTree tree = <span class="hljs-keyword">new</span> BinaryTree();
+        <span class="hljs-comment">/* Construct the following binary tree
+                  1
+                /   \
+               2     3
+              / \     
+             4   5    
+        */</span>
+        tree.root = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">1</span>);
+        tree.root.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">2</span>);
+        tree.root.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">3</span>);
+        tree.root.left.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">4</span>);
+        tree.root.left.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">5</span>);
+
+        System.out.println(<span class="hljs-string">"Pre-Order Traversal:"</span>);
+        tree.preOrderTraversal(tree.root); <span class="hljs-comment">// Output: 1 2 4 5 3</span>
+    }
+}
+</div></code></pre>
+<p><strong>Explanation:</strong></p>
+<ol>
+<li><strong>Visit Node 1:</strong> Print <code>1</code>.</li>
+<li><strong>Traverse Left Subtree of 1 (Node 2):</strong>
+<ul>
+<li>Print <code>2</code>.</li>
+<li>Traverse Left Subtree of 2 (Node 4): Print <code>4</code>.</li>
+<li>Traverse Right Subtree of 2 (Node 5): Print <code>5</code>.</li>
+</ul>
+</li>
+<li><strong>Traverse Right Subtree of 1 (Node 3):</strong> Print <code>3</code>.</li>
+</ol>
+<p><strong>Output:</strong> <code>1 2 4 5 3</code></p>
+<h3 id="post-order-traversal">Post-Order Traversal</h3>
+<p><strong>Order of Operations:</strong></p>
+<ol>
+<li>Traverse the <strong>left subtree</strong>.</li>
+<li>Traverse the <strong>right subtree</strong>.</li>
+<li><strong>Visit the current node.</strong></li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Deleting the tree.</li>
+<li>Postfix expression (Reverse Polish notation) in expression trees.</li>
+</ul>
+<p><strong>Example Implementation:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Java implementation of Post-Order Traversal</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span> </span>{
+    <span class="hljs-keyword">int</span> val;
+    TreeNode left, right;
+
+    TreeNode(<span class="hljs-keyword">int</span> item) {
+        val = item;
+        left = right = <span class="hljs-keyword">null</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinaryTree</span> </span>{
+    TreeNode root;
+
+    <span class="hljs-comment">// Post-Order Traversal: Left -&gt; Right -&gt; Root</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postOrderTraversal</span><span class="hljs-params">(TreeNode node)</span> </span>{
+        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        postOrderTraversal(node.left);          <span class="hljs-comment">// Traverse left</span>
+        postOrderTraversal(node.right);         <span class="hljs-comment">// Traverse right</span>
+        System.out.print(node.val + <span class="hljs-string">" "</span>);        <span class="hljs-comment">// Visit node</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        BinaryTree tree = <span class="hljs-keyword">new</span> BinaryTree();
+        <span class="hljs-comment">/* Construct the following binary tree
+                  1
+                /   \
+               2     3
+              / \     
+             4   5    
+        */</span>
+        tree.root = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">1</span>);
+        tree.root.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">2</span>);
+        tree.root.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">3</span>);
+        tree.root.left.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">4</span>);
+        tree.root.left.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">5</span>);
+
+        System.out.println(<span class="hljs-string">"Post-Order Traversal:"</span>);
+        tree.postOrderTraversal(tree.root); <span class="hljs-comment">// Output: 4 5 2 3 1</span>
+    }
+}
+</div></code></pre>
+<p><strong>Explanation:</strong></p>
+<ol>
+<li><strong>Traverse Left Subtree of 1 (Node 2):</strong>
+<ul>
+<li>Traverse Left Subtree of 2 (Node 4): Print <code>4</code>.</li>
+<li>Traverse Right Subtree of 2 (Node 5): Print <code>5</code>.</li>
+<li>Print <code>2</code>.</li>
+</ul>
+</li>
+<li><strong>Traverse Right Subtree of 1 (Node 3):</strong> Print <code>3</code>.</li>
+<li><strong>Visit Node 1:</strong> Print <code>1</code>.</li>
+</ol>
+<p><strong>Output:</strong> <code>4 5 2 3 1</code></p>
+<h2 id="in-order-traversal">In-Order Traversal</h2>
+<p><strong>Order of Operations:</strong></p>
+<ol>
+<li><strong>Traverse the left subtree.</strong></li>
+<li><strong>Visit the current node.</strong></li>
+<li><strong>Traverse the right subtree.</strong></li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Retrieving data in a sorted order from a Binary Search Tree (BST).</li>
+<li>Infix expression evaluation in expression trees.</li>
+</ul>
+<h3 id="example-implementation">Example Implementation</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// Java implementation of In-Order Traversal</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span> </span>{
+    <span class="hljs-keyword">int</span> val;
+    TreeNode left, right;
+
+    TreeNode(<span class="hljs-keyword">int</span> item) {
+        val = item;
+        left = right = <span class="hljs-keyword">null</span>;
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinaryTree</span> </span>{
+    TreeNode root;
+
+    <span class="hljs-comment">// In-Order Traversal: Left -&gt; Root -&gt; Right</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inOrderTraversal</span><span class="hljs-params">(TreeNode node)</span> </span>{
+        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        inOrderTraversal(node.left);          <span class="hljs-comment">// Traverse left</span>
+        System.out.print(node.val + <span class="hljs-string">" "</span>);      <span class="hljs-comment">// Visit node</span>
+        inOrderTraversal(node.right);         <span class="hljs-comment">// Traverse right</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        BinaryTree tree = <span class="hljs-keyword">new</span> BinaryTree();
+        <span class="hljs-comment">/* Construct the following binary tree
+                  1
+                /   \
+               2     3
+              / \     
+             4   5    
+        */</span>
+        tree.root = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">1</span>);
+        tree.root.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">2</span>);
+        tree.root.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">3</span>);
+        tree.root.left.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">4</span>);
+        tree.root.left.right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">5</span>);
+
+        System.out.println(<span class="hljs-string">"In-Order Traversal:"</span>);
+        tree.inOrderTraversal(tree.root); <span class="hljs-comment">// Output: 4 2 5 1 3</span>
+    }
+}
+</div></code></pre>
+<h3 id="explanation">Explanation</h3>
+<ol>
+<li><strong>Traverse Left Subtree of 1 (Node 2):</strong>
+<ul>
+<li><strong>Traverse Left Subtree of 2 (Node 4):</strong> Print <code>4</code>.</li>
+<li><strong>Visit Node 2:</strong> Print <code>2</code>.</li>
+<li><strong>Traverse Right Subtree of 2 (Node 5):</strong> Print <code>5</code>.</li>
+</ul>
+</li>
+<li><strong>Visit Node 1:</strong> Print <code>1</code>.</li>
+<li><strong>Traverse Right Subtree of 1 (Node 3):</strong> Print <code>3</code>.</li>
+</ol>
+<p><strong>Output:</strong> <code>4 2 5 1 3</code></p>
+<h3 id="key-points">Key Points</h3>
+<ul>
+<li>
+<p><strong>Time Complexity:</strong></p>
+<ul>
+<li><strong>O(n)</strong>, where <strong>n</strong> is the number of nodes, since each node is visited once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity:</strong></p>
+<ul>
+<li><strong>O(h)</strong>, where <strong>h</strong> is the height of the tree, due to the recursion stack.</li>
+<li>In the worst case (skewed tree), <strong>h</strong> can be equal to <strong>n</strong>, resulting in <strong>O(n)</strong> space complexity.</li>
+</ul>
+</li>
+</ul>
+<h3 id="improvements-and-best-practices">Improvements and Best Practices</h3>
+<ul>
+<li>
+<p><strong>Iterative Approach:</strong> To optimize space, especially for very deep trees, consider using an iterative approach with an explicit stack.</p>
+<p><strong>Example:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inOrderTraversalIterative</span><span class="hljs-params">(TreeNode root)</span> </span>{
+    Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+    TreeNode current = root;
+    
+    <span class="hljs-keyword">while</span> (current != <span class="hljs-keyword">null</span> || !stack.isEmpty()) {
+        <span class="hljs-keyword">while</span> (current != <span class="hljs-keyword">null</span>) {
+            stack.push(current);
+            current = current.left;
+        }
+        current = stack.pop();
+        System.out.print(current.val + <span class="hljs-string">" "</span>);
+        current = current.right;
+    }
+}
+</div></code></pre>
+</li>
+<li>
+<p><strong>Tail Recursion:</strong> Some Java compilers optimize tail-recursive methods, but it's not guaranteed. Be cautious with very deep recursion to avoid <code>StackOverflowError</code>.</p>
+</li>
+<li>
+<p><strong>Null Checks:</strong> Always ensure nodes are not null to prevent runtime exceptions.</p>
+</li>
+<li>
+<p><strong>Modular Code:</strong> Separate traversal logic from other functionalities to enhance code readability and maintainability.</p>
+</li>
+</ul>
+<h3 id="practical-applications">Practical Applications</h3>
+<ul>
+<li>
+<p><strong>Binary Search Trees (BST):</strong> In-order traversal of a BST retrieves nodes in ascending order, making it useful for operations like sorting or verifying the integrity of the tree.</p>
+</li>
+<li>
+<p><strong>Expression Trees:</strong> Used in compilers and calculators to evaluate expressions written in infix notation.</p>
+</li>
+<li>
+<p><strong>Data Serialization:</strong> In-order traversal can be used to serialize binary trees to ensure a consistent order of elements.</p>
+</li>
+</ul>
+<p>By understanding and implementing in-order traversal alongside pre-order and post-order traversals, you can effectively navigate and manipulate binary trees in your Java applications.</p>
+<h3 id="key-points">Key Points</h3>
+<ul>
+<li>
+<p><strong>Time Complexity:</strong> Both traversals have a time complexity of <strong>O(n)</strong>, where <strong>n</strong> is the number of nodes, since each node is visited once.</p>
+</li>
+<li>
+<p><strong>Space Complexity:</strong></p>
+<ul>
+<li><strong>O(h)</strong>, where <strong>h</strong> is the height of the tree, due to the recursion stack.</li>
+<li>In the worst case (skewed tree), <strong>h</strong> can be equal to <strong>n</strong>, resulting in <strong>O(n)</strong> space complexity.</li>
+</ul>
+</li>
+</ul>
+<h3 id="improvements-and-best-practices">Improvements and Best Practices</h3>
+<ul>
+<li>
+<p><strong>Iterative Approach:</strong> To optimize space, especially for very deep trees, consider using an iterative approach with an explicit stack.</p>
+</li>
+<li>
+<p><strong>Tail Recursion:</strong> Some Java compilers optimize tail-recursive methods, but it's not guaranteed. Be cautious with very deep recursion to avoid <code>StackOverflowError</code>.</p>
+</li>
+<li>
+<p><strong>Null Checks:</strong> Always ensure nodes are not null to prevent runtime exceptions.</p>
+</li>
+</ul>
+<p>By understanding and implementing these traversal methods, you can effectively navigate and manipulate binary trees in your Java applications.</p>
+
+</body>
+</html>
