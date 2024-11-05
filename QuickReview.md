@@ -7,6 +7,23 @@ Pre-order, in-order, and post-order traversal are three common ways to visit all
 In pre-order traversal, the root node is visited first, followed by the left subtree and then the right subtree. 
 
 The pre-order traversal of a binary tree is useful for creating a copy of the tree, evaluating expressions, and prefix notation in mathematical expressions.
+## Quick Notes on General Binary Tree Traversal and Binary Search Tree Traversal
+
+### Time Complexity
+- **O(n)** where n is the number of nodes in the binary tree.
+
+### Space Complexity
+- **O(h)** where h is the height of the binary tree.
+
+### Searching for a Node
+Searching for a node in a binary tree vs a binary search tree (BST) can be done using pre-order traversal. In a binary search tree, the left subtree of a node contains only nodes with keys less than the node's key, and the right subtree contains only nodes with keys greater than the node's key. By comparing the key of the current node with the target key, we can decide whether to search in the left or right subtree.
+
+- If the target key is less than the current node's key, we search in the left subtree.
+- If the target key is greater than the current node's key, we search in the right subtree.
+
+### Time Complexity in BST
+- If the tree is skewed: **O(n)**
+- If the tree is balanced: **O(log n)**
 
 Here is an example of pre-order traversal in Java using recursion:
 
